@@ -4,7 +4,7 @@ We proposed an new framework, **CROWN**, to **certify** robustness of neural net
 
 Huan Zhang\*, Tsui-Wei Weng\*, Pin-Yu Chen, Cho-Jui Hsieh and Luca Daniel, "[**Efficient Neural Network Robustness Certification with General Activation Functions**](http://arxiv.org/abs/1811.00866)", NIPS 2018. (\* Equal Contribution)
 
-The code in this repository is released under Apache-2.0 License and is intended to reproduce paper results only (see LICENSE for more details). A re-implementation of CROWN with better readability and bug fixes can be found [here](https://github.com/huanzhang12/RecurJac-Jacobian-Bounds).
+The code in this repository is released under Apache-2.0 License and is intended to reproduce paper results only (see LICENSE for more details). An alternative implementation of CROWN can be found [here](https://github.com/huanzhang12/RecurJac-Jacobian-Bounds).
 
 Use the following bibtex entry to cite our work:
 ```
