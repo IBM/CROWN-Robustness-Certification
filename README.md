@@ -69,7 +69,68 @@ Usage: ./run.sh model modeltype layer neuron norm solver target --activation ACT
 
 The main interfacing code is `main.py`, which provides additional options. Use `python main.py -h` to explore these options.
 
-Examples
+
+Training your own models and evaluating your own models with various methods
+-------------------
+0. We provide our pre-trained MNIST and CIFAR models that are used in the paper [here](http://jaina.cs.ucdavis.edu/datasets/adv/relu_verification/models_crown.tar). 
+
+1. To train a new multilayer perceptron (MLP) model, we provide the training script `train_nlayer.py` to train a n-layer MLP with k hidden neurons per layer. For example, n = 4, k = 20, dataset = MNIST, activation = relu, save model name = mnist_4layer_relu_20:
+
+```
+python train_nlayer.py 20 20 20 --model mnist --activation relu --lr LEARNING_RATE --epochs EPOCHS --modelfile mnist_4layer_relu_20
+```
+
+2. Put your saved model `mnist_4layer_relu_20` in the folder `models`:
+
+```
+mkdir models
+mv mnist_4layer_relu_20 models/ 
+```
+
+3. Evaluate the saved model `mnist_4layer_relu_20` and compare with the following methods reported in the paper: CROWN, Fast-Lin, Fast-Lip, Op-norm, LP-Full, LP 
+
+* If you want to run `CROWN-Ada` (the adaptive upper and lower bounds on ReLU activations, this improves Fast-Lin's result) with random target and L_inf norm on one image:
+
+```
+python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method general 
+```
+
+* If you want to run `Fast-Lin` on the same model:
+```
+python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method ours
+```
+
+* If you want to run `Fast-Lip` on the same model:
+```
+python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method ours --lipsbnd fast
+```
+
+* If you want to run `Op-norm` (the global lipschitz constant based approach, see [3])
+```
+python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method spectral 
+```
+
+* If you want to run `LP-Full` (the convex outer polytope approach, casted as Linear/Quadratic programming, see Formulation in [18]): 
+```
+python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method LPFULL
+```
+(please install gurobipy in advance)
+
+* If you want to run `LP` (the convex outer polytope approach. The intermediate bounds are obtained by Fast-Lin and only solve one LP at the last layer.)
+```
+python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method LP
+```
+
+For more argument options, please use `--help` to check: 
+```
+python train_nlayer.py --help
+python main.py --help
+```
+
+Our codes can be easily adapted to running CROWN with different number of hidden nodes in each layer and will be updated shortly.
+
+
+Additional Examples
 ----------------
 
 For example, to evaluate the Linf robustness of MNIST 3\*[1024] adversarially trained model using CROWN-adaptive on least likely targets, run
@@ -113,5 +174,5 @@ To enable multithreaded computing, changing the number `1` in `run.sh` to the nu
 ```
 NUMBA_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 ```
-The code in this repository is released under Apache-2.0 License and is intended to reproduce paper results only (see LICENSE for more details). An alternative version of CROWN can be found [here](https://github.com/huanzhang12/RecurJac-Jacobian-Bounds).
+
 
