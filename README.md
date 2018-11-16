@@ -70,7 +70,7 @@ Usage: ./run.sh model modeltype layer neuron norm solver target --activation ACT
 The main interfacing code is `main.py`, which provides additional options. Use `python main.py -h` to explore these options.
 
 
-Training your own models and evaluating your own models with various methods
+Training your own models and evaluating with CROWN and other comparitive methods
 -------------------
 0. We provide our pre-trained MNIST and CIFAR models that are used in the paper [here](http://jaina.cs.ucdavis.edu/datasets/adv/relu_verification/models_crown.tar). 
 
@@ -105,18 +105,17 @@ python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm
 python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method ours --lipsbnd fast
 ```
 
-* If you want to run `Op-norm` (the global lipschitz constant based approach, see [3])
+* If you want to run `Op-norm` (the global lipschitz constant based approach, see [[3]](https://arxiv.org/abs/1312.6199))
 ```
 python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method spectral 
 ```
 
-* If you want to run `LP-Full` (the convex outer polytope approach, casted as Linear/Quadratic programming, see Formulation in [18]): 
+* If you want to run `LP-Full`, please install [gurobipy](http://www.gurobi.com/documentation/8.1/quickstart_windows/py_python_interface) in advance (the convex outer polytope approach, casted as Linear/Quadratic programming, see the LP Formulation in [[18]](https://arxiv.org/abs/1711.00851)): 
 ```
 python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method LPFULL
 ```
-(please install gurobipy in advance)
 
-* If you want to run `LP` (the convex outer polytope approach. The intermediate bounds are obtained by Fast-Lin and only solve one LP at the last layer.)
+* If you want to run `LP`, please install [gurobipy](http://www.gurobi.com/documentation/8.1/quickstart_windows/py_python_interface) in advance  (the convex outer polytope approach. The intermediate bounds are obtained by Fast-Lin and only solve one LP at the last layer.)
 ```
 python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method LP
 ```
@@ -163,7 +162,6 @@ The following result in log file is obtained:
 ```
 [L0] model = models/mnist_3layer_tanh_20, avg robustness_gx = 1.42974, numimage = 97, total_time = 14.1968
 ```
-
 
 Other notes
 -------------------
