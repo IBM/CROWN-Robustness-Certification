@@ -112,12 +112,12 @@ python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm
 
 * If you want to run `LP-Full`, please install [gurobipy](http://www.gurobi.com/documentation/8.1/quickstart_windows/py_python_interface) in advance (the convex outer polytope approach, casted as Linear/Quadratic programming, see the LP Formulation in [[18]](https://arxiv.org/abs/1711.00851)): 
 ```
-python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method LPFULL
+python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --LPFULL
 ```
 
 * If you want to run `LP`, please install [gurobipy](http://www.gurobi.com/documentation/8.1/quickstart_windows/py_python_interface) in advance  (the convex outer polytope approach. The intermediate bounds are obtained by Fast-Lin and only solve one LP at the last layer.)
 ```
-python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --method LP
+python main.py --model mnist --hidden 20 --numlayer 4 --targettype random --norm i --numimage 1 --activation relu --LP
 ```
 
 For more argument options, please use `--help` to check: 
