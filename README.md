@@ -83,7 +83,6 @@ python train_nlayer.py 20 20 20 --model mnist --activation relu --lr LEARNING_RA
 2. Put your saved model `mnist_4layer_relu_20` in the folder `models`:
 
 ```
-mkdir models
 mv mnist_4layer_relu_20 models/ 
 ```
 
