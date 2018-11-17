@@ -70,7 +70,7 @@ Usage: ./run.sh model modeltype layer neuron norm solver target --activation ACT
 The main interfacing code is `main.py`, which provides additional options. Use `python main.py -h` to explore these options.
 
 
-Training your own models and evaluating with CROWN and other comparitive methods
+Training your own models and evaluating CROWN and other methods
 -------------------
 0. We provide our pre-trained MNIST and CIFAR models that are used in the paper [here](http://jaina.cs.ucdavis.edu/datasets/adv/relu_verification/models_crown.tar). 
 
